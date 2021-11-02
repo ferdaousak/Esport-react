@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import TeamItem from './TeamItem';
 import { fetchTeamswithpages } from './LeaguesAPI';
 import { Pagination, Stack, List, CircularProgress } from '@mui/material';
 
+import { VideoGameContext } from '../App.js';
 
 const initialState = () => { return []; }
 
@@ -17,11 +18,13 @@ function Teams() {
         setPage(value);
 
     };
+
+    const { currentGame } = useContext(VideoGameContext)
     async function fetChData(p = 1) {
 
         setLoading(true);
 
-        const data = await fetchTeamswithpages(p);
+        const data = await fetchTeamswithpages(currentGame, p);
 
         setTotal(data.headers.get('x-total'));
 
@@ -33,7 +36,7 @@ function Teams() {
     useEffect(() => {
         fetChData(page);
 
-    }, [page]);
+    }, [page, currentGame]);
 
     return (
         <div>

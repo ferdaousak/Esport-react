@@ -1,4 +1,4 @@
-import { Avatar, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
+import { Avatar, List, ListItem, ListItemAvatar, ListItemText, Stack } from '@mui/material';
 import React, { Component, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
 import { fetchLeague, fetchTeam } from './LeaguesAPI';
@@ -32,42 +32,48 @@ function Team() {
     };
 
     return (
-        <Card style={styleContainer}>
-            <CardMedia
-                component="img"
-                height="auto"
-                image={team.image_url}
-                alt="green iguana"
-            />
-            <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                    {team.name}
-                </Typography>
-                {team.location ? <Typography gutterBottom variant="subtitle1" component="div">
-                    {team.location}
-                </Typography> : null}
+        <Stack direction='row'>
+            <Card sx={{ maxWidth: 300 }}>
+                <CardMedia
+                    component="img"
+                    height="auto"
+                    image={team.image_url}
+                    alt="green iguana"
+                />
+            </Card>
+            <Card>
 
-                {team.current_videogame ?
-                    <Typography variant="subtitle1" color="text.secondary">{team.current_videogame.name}
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                        {team.name}
                     </Typography>
-                    :
-                    null
-                }
-                <List>
-                    {team.players.map(player => (
-                        <ListItem>
-                            <ListItemText primary={player.name} secondary={' nationality ' + player.nationality} >
+                    {team.location ? <Typography gutterBottom variant="subtitle1" component="div">
+                        {team.location}
+                    </Typography> : null}
 
-                            </ListItemText>
+                    {team.current_videogame ?
+                        <Typography variant="subtitle1" color="text.secondary">{team.current_videogame.name}
+                        </Typography>
+                        :
+                        null
+                    }
+                    <List>
+                        {team.players.map(player => (
+                            <ListItem>
+                                <ListItemText primary={player.name} secondary={' nationality ' + player.nationality} >
 
-                        </ListItem>
+                                </ListItemText>
 
-                    ))}
+                            </ListItem>
+
+                        ))}
 
 
-                </List>
-            </CardContent>
-        </Card >
+                    </List>
+                </CardContent>
+
+            </Card>
+        </Stack >
     );
 
 }

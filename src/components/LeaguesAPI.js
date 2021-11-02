@@ -17,10 +17,10 @@
 //     return { json: json, headers: response.headers };
 // }
 
-export const fetchLeagueswithpages = async (page = 1) => {
+export const fetchLeagueswithpages = async (game = 1, page = 1) => {
 
     const response = await fetch(
-        process.env.REACT_APP_BASE_URL + '/leagues?page[number]=' + page + '&page[size]=5',
+        process.env.REACT_APP_BASE_URL + 'videogames/' + game + '/leagues/?sort=id&page[number]=' + page + '&page[size]=5',
         {
             mode: 'cors',
             method: 'GET',
@@ -35,8 +35,9 @@ export const fetchLeagueswithpages = async (page = 1) => {
 }
 export const fetchLeague = async (leagueId) => {
 
+
     const response = await fetch(
-        process.env.REACT_APP_BASE_URL + "/leagues/" + leagueId,
+        process.env.REACT_APP_BASE_URL + 'leagues/' + leagueId,
         {
             mode: 'cors',
             method: 'GET',
@@ -50,10 +51,10 @@ export const fetchLeague = async (leagueId) => {
     return json;
 }
 
-export const fetchTeamswithpages = async (page = 1) => {
+export const fetchTeamswithpages = async (game = 1, page = 1) => {
 
     const response = await fetch(
-        process.env.REACT_APP_TEAMS_URL + '?page[number]=' + page + '&page[size]=6',
+        process.env.REACT_APP_BASE_URL + 'teams?filter[videogame_id]=' + game + '&sort=id&page[number]=' + page + '&page[size]=6',
         {
             mode: 'cors',
             method: 'GET',
@@ -69,7 +70,7 @@ export const fetchTeamswithpages = async (page = 1) => {
 export const fetchTeam = async (teamId) => {
 
     const response = await fetch(
-        process.env.REACT_APP_TEAMS_URL + "/" + teamId,
+        process.env.REACT_APP_BASE_URL + 'teams/' + teamId,
         {
             mode: 'cors',
             method: 'GET',
@@ -86,7 +87,7 @@ export const fetchTeam = async (teamId) => {
 export const fetchVideoGames = async () => {
 
     const response = await fetch(
-        process.env.REACT_APP_BASE_URL + "/videogames",
+        process.env.REACT_APP_BASE_URL + 'videogames',
         {
             mode: 'cors',
             method: 'GET',
@@ -96,6 +97,8 @@ export const fetchVideoGames = async () => {
             }
         }
     )
+
     const json = await response.json();
+
     return json;
 }
