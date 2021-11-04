@@ -1,22 +1,3 @@
-
-
-// export const fetchLeagues = async () => {
-
-//     const response = await fetch(
-//         process.env.REACT_APP_BASE_URL,
-//         {
-//         
-//             method: 'GET',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//                 'Authorization': 'Bearer ' + process.env.REACT_APP_TOKEN
-//             }
-//         }
-//     )
-//     const json = await response.json();
-//     return { json: json, headers: response.headers };
-// }
-
 export const fetchLeagueswithpages = async (game = 1, page = 1) => {
 
     const response = await fetch(
